@@ -1,4 +1,6 @@
-# python -m app.test_scripts.test_latency
+# Script which tests the latency of different LLMs
+
+# To run, enter in terminal: python -m app.test_scripts.test_latency
 
 from ..utils.LLMCaller import *
 from ..evaluation import evaluation_function, Params

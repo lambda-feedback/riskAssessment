@@ -1,3 +1,5 @@
+# Builds on BaseTestClass to allow testing of multiple risk assessment examples (from data/example_risk_assessments.py)
+
 from ..test_classes.BaseTestClass import BaseTestClass
 from ..utils.LLMCaller import LLMCaller
 import pandas as pd

@@ -1,3 +1,5 @@
+# Series of classes built on LLMCaller base class, used to get LLM outputs from prompt inputs.
+
 import openai
 import requests
 import anthropic

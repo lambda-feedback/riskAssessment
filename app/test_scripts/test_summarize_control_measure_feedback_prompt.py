@@ -1,4 +1,4 @@
-# python -m app.test_scripts.test_summarize_control_measure_feedback_prompt
+# To run, enter in terminal: python -m app.test_scripts.test_summarize_control_measure_feedback_prompt
 
 from ..utils.LLMCaller import *
 from ..test_classes.TestSummarizeControlMeasureFeedback import TestSummarizePreventionFeedback, TestSummarizeMitigationFeedback

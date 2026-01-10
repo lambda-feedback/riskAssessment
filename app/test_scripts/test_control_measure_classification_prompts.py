@@ -1,4 +1,6 @@
-# python -m app.test_scripts.test_control_measure_classification_prompts
+# To run, enter in terminal: python -m app.test_scripts.test_control_measure_classification_prompts
+
+# Script that tests the accuracy of control measure classification prompt and performs ablation study to see impact of few-shot and chain-of-thought prompting on accuracy.
 
 from ..test_classes.TestBothPreventionAndMitigationInput import TestBothPreventionAndMitigationInput
 from ..test_classes.TestPreventionInput__ControlMeasureClassifiationPrompt import TestPreventionInput__ControlMeasureClassifiationPrompt

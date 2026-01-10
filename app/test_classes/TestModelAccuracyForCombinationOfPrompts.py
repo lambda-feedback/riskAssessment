@@ -1,3 +1,5 @@
+# Builds on TestModelAccuracy class to test the accuracy of multiple prompts used in sequence, e.g. the HarmCausedAndHazardEvent and ControlMeasureClassification prompts.
+
 from ..test_classes.TestModelAccuracy import TestModelAccuracy
 from ..utils.LLMCaller import LLMCaller
 

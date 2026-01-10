@@ -1,3 +1,5 @@
+# Class which contains a prompt input object and the expected output for the prompt.
+
 try:
     from ..prompts.BasePromptInput import BasePromptInput
     from ..data.RiskAssessment import RiskAssessment

@@ -1,3 +1,5 @@
+# Class used to create Risk Assessment examples with methods to create LLM prompts specific to the risk assessment example from LLM prompt templates 
+
 from typing import Type
 
 from ..utils.LLMCaller import *

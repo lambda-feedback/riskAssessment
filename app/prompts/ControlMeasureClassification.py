@@ -1,3 +1,5 @@
+# PromptInput class used to classify a control measure as either a prevention, mitigation, both or neither. This prompt takes the "event that leads to harm" and the "harm caused" as input.
+
 from ..prompts.BasePromptInput import BasePromptInput
 from ..utils.RegexPatternMatcher import RegexPatternMatcher
 

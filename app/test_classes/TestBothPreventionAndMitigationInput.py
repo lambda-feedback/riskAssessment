@@ -1,3 +1,5 @@
+# Builds on TestControlMeasureClassificationPrompt.py to test % of times both prevention and mitigation correctly classified.
+
 from ..test_classes.TestControlMeasureClassificationPrompt import TestControlMeasureClassificationPrompt
 from ..utils.LLMCaller import LLMCaller
 import numpy as np

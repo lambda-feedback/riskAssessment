@@ -1,3 +1,5 @@
+# PromptInput class that takes in the output from the ControlMeasureClassification prompt and shortens it to 3 sentences.
+
 from ..prompts.BasePromptInput import BasePromptInput
 
 class SummarizeControlMeasureFeedback(BasePromptInput):

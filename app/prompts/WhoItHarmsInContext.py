@@ -1,3 +1,5 @@
+# PromptInput class that checks whether the "Who it harms" input matches the "activity", "hazard" and "how it harms" inputs.
+
 from ..prompts.BasePromptInput import BasePromptInput
 from ..utils.RegexPatternMatcher import RegexPatternMatcher
 

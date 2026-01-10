@@ -1,3 +1,5 @@
+# Base class that other PromptInput classes inherit from.
+
 try:
     from utils.RegexPatternMatcher import RegexPatternMatcher
 except:

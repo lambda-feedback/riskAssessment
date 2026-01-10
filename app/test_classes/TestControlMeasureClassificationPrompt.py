@@ -1,3 +1,5 @@
+# Builds on TestModelAccuracyForCombinationOfPrompts.py to test accuracy of control measure classification.
+
 from ..test_classes.TestModelAccuracyForCombinationOfPrompts import TestModelAccuracyForCombinationOfPrompts
 from ..utils.LLMCaller import LLMCaller
 

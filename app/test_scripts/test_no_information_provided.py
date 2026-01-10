@@ -1,4 +1,6 @@
-# python -m app.test_scripts.test_no_information_provided
+# Script which tests the accuracy of the NoInformationProvided.py prompt
+
+# To run, enter in terminal: python -m app.test_scripts.test_no_information_provided
 
 from ..test_utils.InputAndExpectedOutput import InputAndExpectedOutputForSinglePrompt
 from ..utils.LLMCaller import *

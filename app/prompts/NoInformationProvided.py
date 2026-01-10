@@ -1,3 +1,5 @@
+# PromptInput class that checks whether no information is provided in the "prevention" or "mitigation" input fields.
+
 from .BasePromptInput import BasePromptInput
 
 class NoInformationProvided(BasePromptInput):

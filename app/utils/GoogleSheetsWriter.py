@@ -1,7 +1,7 @@
-import csv
+# Class used to write results from tests to google sheets.
+
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
-from datetime import datetime
 
 class GoogleSheetsWriter:
     def __init__(self, sheet_name):

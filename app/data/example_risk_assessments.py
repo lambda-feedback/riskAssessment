@@ -1,6 +1,4 @@
-# Learnings:
-# 1. Keeping a safe distance away from a possible projectile is a prevention measure.
-# The hazard event is therefore the projectile hitting someone, not the projectile being released.
+# Risk Assessments used to test the accuracy of LLM prompts
 
 import numpy as np
 

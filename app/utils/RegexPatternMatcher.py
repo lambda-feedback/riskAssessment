@@ -1,3 +1,5 @@
+# Class used to extract classifications from LLM outputs, e.g. prevention/mitigation for ControlMeasureClassificationPrompt
+
 import re
 
 class HarmCausedAndHazardEventAndHazardEvent:

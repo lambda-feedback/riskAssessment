@@ -26,7 +26,6 @@ class Params(TypedDict):
     is_feedback_text: bool
     is_risk_matrix: bool
     is_risk_assessment: bool
-    are_all_input_fields_entered_manually: bool
     LLM: str
 
 def provide_feedback_on_risk_matrix(response):
@@ -237,7 +236,6 @@ def evaluation_function(response: Any, answer: Any, params: Params) -> Result:
         LLM_name = params["LLM"]
         LLM = LLM_dictionary[LLM_name]
     
-    if params['are_all_input_fields_entered_manually'] == True:
         activity, hazard, how_it_harms, who_it_harms, uncontrolled_likelihood, uncontrolled_severity, uncontrolled_risk, prevention, mitigation, controlled_likelihood, controlled_severity, controlled_risk = np.array(response).flatten()
 
         RA = RiskAssessment(activity=activity, hazard=hazard, who_it_harms=who_it_harms, how_it_harms=how_it_harms,
@@ -350,117 +348,6 @@ def evaluation_function(response: Any, answer: Any, params: Params) -> Result:
 
                 hazard_event = harm_caused_and_hazard_event_pattern.hazard_event
                 harm_caused = harm_caused_and_hazard_event_pattern.harm_caused
-            
-            control_measure_prompt_with_mitigation_input = RA.get_control_measure_prompt_with_mitigation_input()
-            control_measure_prompt_with_mitigation_output, control_measure_prompt_with_mitigation_pattern = RA.get_prompt_output_and_pattern_matched(prompt_input_object=control_measure_prompt_with_mitigation_input, 
-                                                                                                                                                     LLM_caller=LLM, 
-                                                                                                                                                     harm_caused=harm_caused, 
-                                                                                                                                                     hazard_event=hazard_event)
-            
-            feedback_for_correct_answers, feedback_for_incorrect_answers, is_everything_correct = provide_feedback_on_control_measure_input(
-                control_measure_input_field='mitigation',
-                control_measure_prompt_input=control_measure_prompt_with_mitigation_input,
-                control_measure_prompt_output=control_measure_prompt_with_mitigation_output,
-                control_measure_prompt_pattern=control_measure_prompt_with_mitigation_pattern,
-                feedback_for_correct_answers=feedback_for_correct_answers,
-                feedback_for_incorrect_answers=feedback_for_incorrect_answers,
-                is_everything_correct=is_everything_correct,
-                risk_assessment=RA,
-                LLM_caller=LLM
-            )
-
-        if is_everything_correct == True:
-            feedback_for_incorrect_answers = '# Congratulations! All your answers are correct!'
-        
-        if fields_for_which_no_information_provided == []:
-            no_information_provided_message = ''
-        else:
-            no_information_provided_message = f'\n\n\n\n\n## Fields for which no information is provided and hence no feedback given: {", ".join(fields_for_which_no_information_provided)}\n\n\n\n\n'
-
-        if fields_for_which_no_information_provided != ['Prevention', 'Mitigation']:
-            hazard_event_and_harm_caused_inferred_message = f'''## The following were inferred from your answers: \n\n\n\n\n
-            \n\n\n\n\n### Event that leads to harm: "{hazard_event}"\n\n\n\n\n
-            \n\n\n\n\n### Harm caused to '{RA.who_it_harms}': "{harm_caused}".\n\n\n\n
-            \n\n\n\n\n### If they are incorrect, please make these more explicit in the "Hazard" and "How it harms" fields.\n\n\n\n\n'''
-        else:
-            hazard_event_and_harm_caused_inferred_message = ''
-        
-        feedback_for_correct_answers += f'''
-        \n\n\n\n### There are no errors in your likelihood, severity, and risk values.\n\n\n\n'''
-
-        feedback=f'''{hazard_event_and_harm_caused_inferred_message} \n\n\n\n\n
-        {feedback_for_incorrect_answers} \n\n\n\n\n
-        {feedback_for_correct_answers} \n\n\n\n\n
-        {no_information_provided_message}'''
-
-        return Result(is_correct=is_everything_correct, feedback=feedback)
-    
-    if params['are_all_input_fields_entered_manually'] == False:
-
-        prevention, mitigation = np.array(response).flatten()
-
-        activity = 'Heat transfer lab'
-        hazard = 'Boiling hot water'
-        who_it_harms = 'Students'
-        how_it_harms = 'Burns'
-
-        hazard_event = 'Boiling hot water split on student'
-        harm_caused = 'Burns'
-
-        RA = RiskAssessment(activity=activity, hazard=hazard, who_it_harms=who_it_harms, how_it_harms=how_it_harms,
-                            uncontrolled_likelihood=1, uncontrolled_severity=1,
-                            uncontrolled_risk=1, prevention=prevention, mitigation=mitigation,
-                            controlled_likelihood=1, controlled_severity=1, controlled_risk=1,
-                            prevention_prompt_expected_class='prevention', mitigation_prompt_expected_class='mitigation', risk_domain='')
-
-        input_check_feedback_message = RA.get_input_check_feedback_message()
-
-        if input_check_feedback_message != True:
-            return Result(is_correct=False,
-                        feedback=f'''\n\n\n\n\n # Feedback:\n\n\n\n\n
-                                    \n\n\n\n\n## {input_check_feedback_message}\n\n\n\n\n''')
-        
-        feedback_for_incorrect_answers = '\n\n\n\n# Feedback for Incorrect Answers\n\n\n\n'
-        feedback_for_correct_answers = '\n\n\n\n# Feedback for Correct Answers\n\n\n\n'
-
-        fields_for_which_no_information_provided = []
-
-        is_everything_correct = True
-
-        # PREVENTION CHECKS
-        no_information_provided_for_prevention_prompt_input = RA.get_no_information_provided_for_prevention_input()
-        no_information_provided_for_prevention_prompt_output, no_information_provided_for_prevention_pattern = RA.get_prompt_output_and_pattern_matched(prompt_input_object=no_information_provided_for_prevention_prompt_input, LLM_caller=LLM)
-
-        if no_information_provided_for_prevention_pattern == 'no information provided' or RA.prevention == '':
-            fields_for_which_no_information_provided.append('Prevention')
-        
-        else:
-
-            control_measure_prompt_with_prevention_input = RA.get_control_measure_prompt_with_prevention_input()
-            control_measure_prompt_with_prevention_output, control_measure_prompt_with_prevention_pattern = RA.get_prompt_output_and_pattern_matched(prompt_input_object=control_measure_prompt_with_prevention_input, 
-                                                                                                                                                     LLM_caller=LLM,
-                                                                                                                                                     harm_caused=harm_caused, 
-                                                                                                                                                     hazard_event=hazard_event)
-
-            feedback_for_correct_answers, feedback_for_incorrect_answers, is_everything_correct = provide_feedback_on_control_measure_input(
-                control_measure_input_field='prevention',
-                control_measure_prompt_input=control_measure_prompt_with_prevention_input,
-                control_measure_prompt_output=control_measure_prompt_with_prevention_output,
-                control_measure_prompt_pattern=control_measure_prompt_with_prevention_pattern,
-                feedback_for_correct_answers=feedback_for_correct_answers,
-                feedback_for_incorrect_answers=feedback_for_incorrect_answers,
-                is_everything_correct=is_everything_correct,
-                risk_assessment=RA,
-                LLM_caller=LLM
-            )
-
-        # MITIGATION CHECKS
-        no_information_provided_for_mitigation_prompt_input = RA.get_no_information_provided_for_mitigation_input()
-        no_information_provided_for_mitigation_prompt_output, no_information_provided_for_mitigation_pattern = RA.get_prompt_output_and_pattern_matched(prompt_input_object=no_information_provided_for_mitigation_prompt_input, LLM_caller=LLM)
-
-        if no_information_provided_for_mitigation_pattern == 'no information provided' or RA.mitigation == '':
-            fields_for_which_no_information_provided.append('Mitigation')
-        else:
             
             control_measure_prompt_with_mitigation_input = RA.get_control_measure_prompt_with_mitigation_input()
             control_measure_prompt_with_mitigation_output, control_measure_prompt_with_mitigation_pattern = RA.get_prompt_output_and_pattern_matched(prompt_input_object=control_measure_prompt_with_mitigation_input, 

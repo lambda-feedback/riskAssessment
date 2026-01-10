@@ -1,3 +1,5 @@
+# Series of classes used to create InputAndExpectedOutput objects for different tests.
+
 from .InputAndExpectedOutput import InputAndExpectedOutputForSinglePrompt, InputAndExpectedOutputForCombinedPrompts
 
 class ExamplesGenerator:

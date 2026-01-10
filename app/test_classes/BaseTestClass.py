@@ -1,3 +1,5 @@
+# Base class used to test the accuracy of different prompts
+
 from ..utils.LLMCaller import LLMCaller
 from ..utils.RegexPatternMatcher import RegexPatternMatcher
 

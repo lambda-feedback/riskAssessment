@@ -1,3 +1,5 @@
+# Builds on BaseTestClass.py to test prompt on single risk assessment example (this is used in unit tests)
+
 from BaseTestClass import BaseTestClass
 from ..utils.LLMCaller import LLMCaller
 

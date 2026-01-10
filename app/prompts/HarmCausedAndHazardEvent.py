@@ -1,3 +1,5 @@
+# PromptInput class used to infer the "event that leads to harm" and the "harm caused" from the student's risk assessment inputs.
+
 from .BasePromptInput import BasePromptInput
 
 class HarmCausedAndHazardEvent(BasePromptInput):

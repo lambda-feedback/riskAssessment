@@ -1,4 +1,5 @@
-# python -m app.test_scripts.risk_domain_test_for_how_it_harms_prompt
+# Script that tests whether the "how it harms" input is from the same risk domain as the "activity" and "hazard" inputs.
+# To run, enter in terminal: python -m app.test_scripts.risk_domain_test_for_how_it_harms_prompt
 
 from ..test_classes.TestModelAccuracy import TestModelAccuracy
 from ..test_utils.ExamplesGenerator import ExamplesGeneratorFromCorrectExamples
