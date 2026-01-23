@@ -2,8 +2,6 @@
 
 ## [Final Year Project Report](https://drive.google.com/file/d/14VX1AJK-K-O7YWuquthELhR62eM6PzRz/view?usp=sharing)
 
-## [Risk Assessment App](https://risk---assessment.streamlit.app/)
-
 ## [Read the Developer Documentation](https://github.com/lambda-feedback/riskAssessment/blob/main/app/docs/dev.md)
 
 ## [Read the User Documentation](https://github.com/lambda-feedback/riskAssessment/blob/main/app/docs/user.md)
